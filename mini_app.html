@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Rohit Giveaway - Spin & Win Real Cash</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
+  
+  <!-- Official Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    :root {
+      --primary-color: #0ea5e9;
+      --primary-dark: #0284c7;
+      --primary-deep: #0369a1;
+      --glow-color: #38bdf8;
+      --light-tint: #e0f2fe;
+      --bg-gradient-top: #0284c7;
+      --bg-gradient-mid: #0ea5e9;
+      --bg-dark: #030712;
+      --card-dark-1: #051937;
+      --card-dark-2: #002e5b;
+      --card-dark-3: #004d80;
+      --text-dark: #082f49;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-dark);
+      color: #1e293b;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Outer App Viewport Frame */
+    .app-viewport {
+      width: 100%;
+      max-width: 440px;
+      min-height: 100vh;
+      background: linear-gradient(180deg, 
+        var(--bg-gradient-top) 0%, 
+        var(--bg-gradient-mid) 130px, 
+        #38bdf8 210px, 
+        #bae6fd 310px, 
+        #e0f2fe 420px, 
+        #f0f9ff 560px, 
+        #f8fafc 100%
+      );
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.85);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 95px;
+      transition: background 0.3s ease;
+    }
+
+    /* 1. Brand Header Bar */
+    .brand-bar {
+      padding: 16px 16px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 40;
+    }
+
+    .brand-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    /* Premium 3D Sky-Blue Emblem Logo */
+    .brand-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 30%, var(--glow-color) 0%, var(--primary-dark) 60%, var(--text-dark) 100%);
+      border: 2px solid #e0f2fe;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.45), inset 0 2px 4px rgba(255,255,255,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-avatar::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -60%;
+      width: 220%;
+      height: 220%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%);
+      animation: brandShine 3.5s infinite linear;
+    }
+
+    @keyframes brandShine {
+      0% { transform: translateX(-100%) translateY(-100%); }
+      100% { transform: translateX(100%) translateY(100%); }
+    }
+
+    .avatar-logo-icon {
+      font-size: 16px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .avatar-text-tag {
+      font-size: 7px;
+      font-weight: 900;
+      color: #e0f2fe;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1;
+      margin-top: 1px;
+    }
+
+    .brand-text-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text-main {
+      font-size: 17.5px;
+      font-weight: 900;
+      color: #082f49;
+      letter-spacing: -0.4px;
+      line-height: 1.1;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+    }
+
+    .brand-text-sub {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--primary-deep);
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    /* Balance Capsule Badge */
+    .balance-pill-badge {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      padding: 7px 15px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.15);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .balance-pill-badge:active {
+      transform: scale(0.94);
+    }
+
+    .rupee-coin-icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deep) 100%);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 900;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+    }
+
+    .balance-val {
+      font-size: 15px;
+      font-weight: 900;
+      color: #082f49;
+      letter-spacing: -0.2px;
+    }
+
+    /* Main App Body */
+    .app-body {
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* 2. Hero Banner */
+    .hero-banner-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-banner {
+      background: #ffffff;
+      border-radius: 24px;
+      border: 3px solid var(--glow-color);
+      padding: 18px 16px 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(14, 165, 233, 0.25), 0 2px 8px rgba(0,0,0,0.03);
+      min-height: 155px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, #e0f2fe 0%, #bae6fd 60%, transparent 75%);
+      border-radius: 50%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .dots-deco-grid {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 4px);
+      gap: 4px;
+      z-index: 2;
+    }
+
+    .dots-deco-grid span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--glow-color);
+      opacity: 0.85;
+    }
+
+    .banner-text-side {
+      position: relative;
+      z-index: 3;
+      max-width: 62%;
+    }
+
+    .banner-heading-top {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--primary-deep);
+      line-height: 1.05;
+      letter-spacing: -0.5px;
+    }
+
+    .banner-heading-main {
+      font-size: 22px;
+      font-weight: 950;
+      color: var(--primary-dark);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      margin-bottom: 5px;
+    }
+
+    .banner-tagline {
+      font-size: 10px;
+      font-weight: 600;
+      color: #475569;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .btn-join-telegram {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deep) 100%);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-join-telegram:active {
+      transform: scale(0.94);
+    }
+
+    .btn-join-telegram svg {
+      width: 14px;
+      height: 14px;
+      fill: #ffffff;
+    }
+
+    .banner-visual-side {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 120px;
+      height: 120px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tg-3d-disc {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--glow-color) 0%, var(--primary-color) 50%, var(--primary-dark) 100%);
+      border: 3.5px solid #ffffff;
+      box-shadow: 0 14px 28px rgba(2, 132, 199, 0.45), inset 0 -5px 10px rgba(0,0,0,0.2), inset 0 5px 10px rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: floatDisc 4s ease-in-out infinite;
+    }
+
+    @keyframes floatDisc {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(2deg); }
+    }
+
+    .tg-plane-main {
+      width: 50px;
+      height: 50px;
+      fill: #ffffff;
+      filter: drop-shadow(0 4px 6px rgba(3, 105, 161, 0.4));
+      transform: translate(-2px, 2px);
+    }
+
+    /* Banner Pagination */
+    .banner-dots-track {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .b-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #cbd5e1;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .b-dot.active {
+      width: 22px;
+      border-radius: 10px;
+      background-color: var(--primary-color);
+    }
+
+    /* Section Headline */
+    .section-headline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+      margin-bottom: 2px;
+    }
+
+    .section-headline-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .headline-bar-pill {
+      width: 5px;
+      height: 18px;
+      background: var(--primary-color);
+      border-radius: 6px;
+    }
+
+    .headline-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #082f49;
+      letter-spacing: -0.3px;
+    }
+
+    /* 3. Direct Spin Card & Wheel System */
+    .spin-main-card {
+      background: linear-gradient(145deg, var(--card-dark-1) 0%, var(--card-dark-2) 45%, var(--card-dark-3) 100%);
+      border-radius: 26px;
+      padding: 20px 16px 24px;
+      border: 2px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 16px 36px rgba(2, 132, 199, 0.4), inset 0 1px 1px rgba(255,255,255,0.25);
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .spin-main-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .spin-badge-tag {
+      background: rgba(14, 165, 233, 0.25);
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      color: #e0f2fe;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 0 12px rgba(14, 165, 233, 0.3);
+    }
+
+    .spin-hero-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.4px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .spin-hero-sub {
+      font-size: 11.5px;
+      color: #bae6fd;
+      font-weight: 500;
+      max-width: 280px;
+      line-height: 1.35;
+      margin-bottom: 14px;
+    }
+
+    /* Available Spins Pill */
+    .spins-status-capsule {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1.5px solid rgba(56, 189, 248, 0.5);
+      border-radius: 30px;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .spins-count-display {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .spins-count-number {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--glow-color);
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+      margin-left: 2px;
+    }
+
+    .btn-get-spins-mini {
+      background: linear-gradient(135deg, var(--glow-color) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 14px;
+      font-size: 10.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.45);
+      transition: transform 0.15s ease;
+    }
+
+    .btn-get-spins-mini:active {
+      transform: scale(0.92);
+    }
+
+    /* Wheel Canvas Stage */
+    .wheel-stage-container {
+      position: relative;
+      width: 270px;
+      height: 270px;
+      margin: 4px auto 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Outer LED Bezel Ring */
+    .wheel-bezel-ring {
+      position: absolute;
+      width: 266px;
+      height: 266px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #082f49 0%, #051937 100%);
+      border: 5px solid var(--glow-color);
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.65), inset 0 0 15px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    /* Rotating Wheel Disc */
+    .wheel-rotating-canvas {
+      width: 246px;
+      height: 246px;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      z-index: 2;
+      transition: transform 4s cubic-bezier(0.12, 0.98, 0.22, 1);
+    }
+
+    /* Pointer Needle (Top Position) */
+    .wheel-top-pointer {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 34px;
+      z-index: 15;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
+    }
+
+    .wheel-top-pointer svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Center Badge Button */
+    .wheel-center-hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 0%, #e0f2fe 60%, #bae6fd 100%);
+      border: 3.5px solid var(--primary-dark);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: var(--primary-deep);
+      font-size: 11px;
+      z-index: 10;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .wheel-center-hub:active {
+      transform: translate(-50%, -50%) scale(0.92);
+    }
+
+    /* Big Spin CTA Button */
+    .btn-spin-action {
+      width: 100%;
+      max-width: 320px;
+      background: linear-gradient(135deg, var(--glow-color) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      border: none;
+      padding: 15px 0;
+      border-radius: 18px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-spin-action:active {
+      transform: scale(0.96);
+    }
+
+    .btn-spin-action:disabled {
+      background: #475569;
+      color: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-spin-action.pulse-glow {
+      animation: spinBtnPulse 2s infinite;
+    }
+
+    @keyframes spinBtnPulse {
+      0%, 100% { box-shadow: 0 8px 24px rgba(2, 132, 199, 0.45); }
+      50% { box-shadow: 0 8px 32px rgba(56, 189, 248, 0.85); }
+    }
+
+    .spin-footer-note {
+      font-size: 10.5px;
+      color: #bae6fd;
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
+    /* 4. Referral Info Box */
+    .refer-guide-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 18px 16px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    .guide-item-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .guide-item-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .guide-step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f0f9ff;
+      border: 1.5px solid var(--glow-color);
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .guide-step-content h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #082f49;
+      margin-bottom: 1px;
+    }
+
+    .guide-step-content p {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    /* 5. Glassmorphism Navigation */
+    .bottom-glass-nav {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 408px;
+      background: rgba(240, 249, 255, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 40px;
+      padding: 6px 12px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 12px 36px rgba(2, 132, 199, 0.2), 0 2px 8px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      color: #64748b;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .nav-item.active {
+      color: var(--primary-deep);
+    }
+
+    .nav-item.active .nav-icon-bg {
+      background: var(--glow-color);
+      color: #ffffff;
+      width: 48px;
+      height: 28px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(14, 165, 233, 0.45);
+    }
+
+    .nav-icon-bg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-text {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    /* Views */
+    .tab-section {
+      display: none;
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+
+    .tab-section.active-tab {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Wallet View */
+    .wallet-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #032b4d 100%);
+      border-radius: 24px;
+      padding: 22px 20px;
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(2, 132, 199, 0.35);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .wallet-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      right: -40px;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .wallet-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .wallet-huge-balance {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--glow-color);
+      letter-spacing: -0.5px;
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+    }
+
+    .wallet-min-badge {
+      background: rgba(14, 165, 233, 0.2);
+      border: 1px solid var(--glow-color);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #bae6fd;
+    }
+
+    .wallet-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn-action-withdraw {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      border: none;
+      padding: 12px 0;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.45);
+      transition: all 0.2s ease;
+    }
+
+    .btn-action-withdraw:active { transform: scale(0.96); }
+
+    .btn-action-history {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 0;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .transaction-row {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Invite View */
+    .invite-header-card {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-deep) 100%);
+      border-radius: 24px;
+      padding: 24px 20px;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 16px;
+      box-shadow: 0 10px 24px rgba(2, 132, 199, 0.35);
+    }
+
+    .referral-container {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    .code-display-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f0f9ff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1.5px dashed var(--primary-dark);
+      margin: 12px 0;
+    }
+
+    .my-code-text {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 0.5px;
+      word-break: break-all;
+    }
+
+    .btn-copy-code {
+      background: var(--primary-dark);
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Profile View */
+    .profile-banner {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 16px;
+    }
+
+    .profile-avatar-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--glow-color) 0%, var(--primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+    }
+
+    .menu-options-list {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    .menu-item-row {
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .menu-item-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 200;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.active-modal {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-sheet {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 28px 28px 0 0;
+      padding: 24px 20px 40px;
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-backdrop.active-modal .modal-sheet {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #cbd5e1;
+      border-radius: 10px;
+      margin: 0 auto 18px;
+    }
+
+    .btn-dismiss-modal {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      border: none;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Payout Method Tabs */
+    .payout-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .payout-tab-btn {
+      flex: 1;
+      padding: 12px 10px;
+      border-radius: 14px;
+      border: 2px solid #e2e8f0;
+      background: #f8fafc;
+      font-size: 13px;
+      font-weight: 800;
+      color: #64748b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .payout-tab-btn.active-payout-tab {
+      border-color: var(--primary-dark);
+      background: #f0f9ff;
+      color: var(--primary-deep);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+    }
+
+    .custom-input {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 14px;
+      font-size: 13.5px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 10px;
+    }
+
+    .custom-input:focus {
+      border-color: var(--primary-dark);
+    }
+
+    /* Admin Panel Specific Styling */
+    .admin-nav-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+      scrollbar-width: none;
+    }
+    .admin-nav-tabs::-webkit-scrollbar { display: none; }
+
+    .admin-tab-chip {
+      padding: 8px 14px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 11.5px;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid #e2e8f0;
+    }
+    .admin-tab-chip.active {
+      background: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary-dark);
+    }
+
+    .admin-card-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .withdrawal-item-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .withdrawal-item-card.pending { border-left: 5px solid #f59e0b; }
+    .withdrawal-item-card.approved { border-left: 5px solid #10b981; }
+    .withdrawal-item-card.rejected { border-left: 5px solid #ef4444; }
+
+    .color-preset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 10px 0 16px;
+    }
+    .color-preset-btn {
+      padding: 10px 6px;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    /* Toast */
+    .toast-popup {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-60px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 1px solid #1e3a8a;
+    }
+
+    .toast-popup.visible {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Confetti Canvas */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Notification Toast -->
+  <div id="appToast" class="toast-popup">
+    <span id="toastIcon">🎉</span>
+    <span id="toastMessage">₹5.00 added to your balance!</span>
+  </div>
+
+  <!-- Main Viewport Device -->
+  <div class="app-viewport">
+    
+    <!-- Brand Bar with Rohit Giveaway Logo -->
+    <div class="brand-bar">
+      <div class="brand-logo-group" onclick="switchNavTab('home')">
+        <div class="brand-avatar" id="brandLogoAvatar" onclick="handleLogoTripleTap(event)">
+          <span class="avatar-logo-icon">👑</span>
+          <span class="avatar-text-tag">RG</span>
+        </div>
+        <div class="brand-text-container">
+          <span class="brand-text-main" id="brandTitleDisplay">Rohit Giveaway</span>
+          <span class="brand-text-sub" id="brandSubtitleDisplay">TELEGRAM MINI APP</span>
+        </div>
+      </div>
+
+      <div class="balance-pill-badge" onclick="switchNavTab('wallet')">
+        <div class="rupee-coin-icon">₹</div>
+        <span class="balance-val" id="topBalance">0.00</span>
+      </div>
+    </div>
+
+    <!-- App Body Content -->
+    <div class="app-body">
+
+      <!-- ================= TAB 1: HOME ================= -->
+      <div id="tab-view-home" class="tab-section active-tab">
+        
+        <!-- Hero Banner (Telegram Promo) -->
+        <div class="hero-banner-container">
+          <div class="hero-banner" id="mainHeroBanner">
+            <div class="dots-deco-grid">
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+            </div>
+
+            <!-- Banner Text -->
+            <div class="banner-text-side">
+              <div class="banner-heading-top" id="heroSubhead">JOIN OUR</div>
+              <div class="banner-heading-main" id="heroTitle">TELEGRAM</div>
+              <div class="banner-tagline" id="heroDesc">Stay updated with Rohit Giveaway payment proofs & instant alerts!</div>
+              <button class="btn-join-telegram" id="heroBtn" onclick="openOfficialTelegram()">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.61 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.07-1.77 6.78-2.94 8.14-3.51 3.87-1.61 4.67-1.89 5.2-1.9.12 0 .38.03.55.17.14.12.18.28.2.45-.02.07-.02.16-.04.29z"/></svg>
+                <span id="heroBtnLabel">JOIN NOW</span>
+                <span>→</span>
+              </button>
+            </div>
+
+            <!-- 3D Telegram Visual -->
+            <div class="banner-visual-side">
+              <div class="tg-3d-disc">
+                <svg class="tg-plane-main" viewBox="0 0 24 24">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination Dots -->
+          <div class="banner-dots-track">
+            <div class="b-dot active" onclick="activateSlide(0)"></div>
+            <div class="b-dot" onclick="activateSlide(1)"></div>
+          </div>
+        </div>
+
+        <!-- Section Title: Spin & Win -->
+        <div class="section-headline">
+          <div class="section-headline-left">
+            <div class="headline-bar-pill"></div>
+            <div class="headline-title">Lucky Spin Wheel</div>
+          </div>
+          <span style="font-size:11px; font-weight:800; color:var(--primary-dark);">1 REFER = 1 SPIN</span>
+        </div>
+
+        <!-- Direct Spin Wheel System Card -->
+        <div class="spin-main-card">
+          <div class="spin-badge-tag">
+            <span>✨</span>
+            <span>100% Guaranteed Cash Win</span>
+          </div>
+
+          <h3 class="spin-hero-title">Spin & Win Direct Cash</h3>
+          <p class="spin-hero-sub">Refer your friends to get spins! Win instant real cash directly into your wallet.</p>
+
+          <!-- Available Spins Counter Capsule -->
+          <div class="spins-status-capsule">
+            <div class="spins-count-display">
+              Spins Available: <span class="spins-count-number" id="homeSpinsCount">0</span>
+            </div>
+            <button class="btn-get-spins-mini" onclick="switchNavTab('invite')">
+              <span>+ Invite</span>
+            </button>
+          </div>
+
+          <!-- Interactive Wheel Stage -->
+          <div class="wheel-stage-container">
+            <!-- Top Pointer -->
+            <div class="wheel-top-pointer">
+              <svg viewBox="0 0 30 40" fill="none">
+                <path d="M15 40L0 8C0 3.58172 6.71573 0 15 0C23.2843 0 30 3.58172 30 8L15 40Z" fill="#ef4444"/>
+                <path d="M15 32L6 8C6 5.5 10 3 15 3C20 3 24 5.5 24 8L15 32Z" fill="#dc2626"/>
+                <circle cx="15" cy="8" r="4" fill="#ffffff"/>
+              </svg>
+            </div>
+
+            <!-- Outer Bezel Ring -->
+            <div class="wheel-bezel-ring">
+              <!-- Canvas Wheel -->
+              <canvas id="luckyWheelCanvas" class="wheel-rotating-canvas" width="246" height="246"></canvas>
+            </div>
+
+            <!-- Center Hub -->
+            <div class="wheel-center-hub" onclick="triggerDirectSpin()">
+              <span>SPIN</span>
+            </div>
+          </div>
+
+          <!-- Spin Action Button -->
+          <button id="btnHomeSpinAction" class="btn-spin-action" onclick="triggerDirectSpin()">
+            <span>🎯</span>
+            <span id="btnHomeSpinText">REFER FRIENDS TO GET SPINS</span>
+          </button>
+
+          <div class="spin-footer-note">
+            💡 1 Friend Invite via Bot = 1 Free Lucky Spin Chance
+          </div>
+        </div>
+
+        <!-- How It Works Guide -->
+        <div class="refer-guide-card">
+          <div style="font-size:13px; font-weight:800; color:#082f49; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+            <span>📋</span>
+            <span>How to Earn & Withdraw:</span>
+          </div>
+
+          <div class="guide-item-row">
+            <div class="guide-step-badge">1</div>
+            <div class="guide-step-content">
+              <h4>Share Your Telegram Bot Referral Link</h4>
+              <p>Share your unique bot link with friends on Telegram</p>
+            </div>
+          </div>
+
+          <div class="guide-item-row">
+            <div class="guide-step-badge">2</div>
+            <div class="guide-step-content">
+              <h4>Get 1 Spin per Referral</h4>
+              <p>When your friend opens the bot mini app, you get +1 Spin</p>
+            </div>
+          </div>
+
+          <div class="guide-item-row">
+            <div class="guide-step-badge">3</div>
+            <div class="guide-step-content">
+              <h4>Spin Wheel & Win Cash</h4>
+              <p>Spin the wheel to win real wallet cash every time</p>
+            </div>
+          </div>
+
+          <div class="guide-item-row">
+            <div class="guide-step-badge">4</div>
+            <div class="guide-step-content">
+              <h4>Instant Withdrawal (Min ₹20)</h4>
+              <p>Direct payout to your Bank Account or UPI ID</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= TAB 2: INVITE ================= -->
+      <div id="tab-view-invite" class="tab-section">
+        <div class="invite-header-card">
+          <div style="font-size: 42px; margin-bottom: 8px;">🤝</div>
+          <h2 style="font-size: 22px; font-weight: 900; margin-bottom: 6px;">Invite & Get Free Spins</h2>
+          <p style="font-size: 12.5px; opacity: 0.92; max-width: 280px; margin: 0 auto; line-height: 1.4;">
+            Get <b>1 Free Lucky Spin</b> for every friend who joins via your Telegram Bot referral link!
+          </p>
+        </div>
+
+        <div class="referral-container">
+          <span style="font-size: 11px; font-weight: 800; color: #64748b; letter-spacing: 0.5px;">YOUR BOT REFERRAL LINK</span>
+          <div class="code-display-wrap">
+            <span class="my-code-text" id="referralCodeText">https://t.me/RohitGiveawayBot?start=ref_...</span>
+            <button class="btn-copy-code" onclick="copyReferralLink()">COPY</button>
+          </div>
+          
+          <button class="btn-join-telegram" style="width:100%; justify-content:center; background:linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); box-shadow:0 4px 14px rgba(2,132,199,0.4); padding:13px 0; font-size:13.5px;" onclick="shareOnTelegram()">
+            <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:#fff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.61 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.07-1.77 6.78-2.94 8.14-3.51 3.87-1.61 4.67-1.89 5.2-1.9.12 0 .38.03.55.17.14.12.18.28.2.45-.02.07-.02.16-.04.29z"/></svg>
+            <span>Invite Friends on Telegram</span>
+            <span>🚀</span>
+          </button>
+        </div>
+
+        <div class="section-headline">
+          <div class="section-headline-left">
+            <div class="headline-bar-pill"></div>
+            <div class="headline-title">Referral Statistics</div>
+          </div>
+        </div>
+        
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px;">
+          <div style="background:#fff; border:1px solid #e2e8f0; padding:16px; border-radius:18px; text-align:center;">
+            <div style="font-size:24px; font-weight:900; color:var(--primary-dark);" id="statInvitesCount">0</div>
+            <div style="font-size:11px; font-weight:700; color:#64748b;">Friends Joined</div>
+          </div>
+          <div style="background:#fff; border:1px solid #e2e8f0; padding:16px; border-radius:18px; text-align:center;">
+            <div style="font-size:24px; font-weight:900; color:var(--primary-color);" id="statSpinsEarned">0</div>
+            <div style="font-size:11px; font-weight:700; color:#64748b;">Spins Earned</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 3: WALLET ================= -->
+      <div id="tab-view-wallet" class="tab-section">
+        <div class="wallet-hero">
+          <div class="wallet-top-meta">
+            <div>
+              <span style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Available Balance</span>
+              <div class="wallet-huge-balance" id="walletPageBalance">₹ 0.00</div>
+            </div>
+            <div class="wallet-min-badge" id="walletMinBadgeDisplay">
+              Min ₹20 Payout
+            </div>
+          </div>
+          <p style="font-size: 11px; color: #cbd5e1;">Instant 100% Payout via Bank Account & UPI</p>
+
+          <div class="wallet-buttons-grid">
+            <button class="btn-action-withdraw" onclick="openCashoutModal()">
+              <span>⚡</span>
+              <span>Withdraw Cash</span>
+            </button>
+            <button class="btn-action-history" onclick="switchNavTab('home')">
+              <span>🎡</span>
+              <span>Go to Spin</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="section-headline">
+          <div class="section-headline-left">
+            <div class="headline-bar-pill"></div>
+            <div class="headline-title">Recent Transactions</div>
+          </div>
+        </div>
+
+        <div id="transactionFeed" style="margin-top: 10px;">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- ================= TAB 4: PROFILE ================= -->
+      <div id="tab-view-profile" class="tab-section">
+        <div class="profile-banner">
+          <div class="profile-avatar-circle" id="profileUserAvatar">👑</div>
+          <div>
+            <div style="font-size: 16px; font-weight: 900; color: #082f49;" id="profileUserName">Rohit User</div>
+            <div style="font-size: 11px; font-weight: 700; color: #64748b;" id="profileUserId">User ID: #88491204</div>
+            <div style="display:inline-block; margin-top:4px; background:#e0f2fe; color:var(--primary-deep); font-size:9.5px; font-weight:800; padding:2px 8px; border-radius:10px;">
+              VERIFIED TELEGRAM USER
+            </div>
+          </div>
+        </div>
+
+        <div class="section-headline">
+          <div class="section-headline-left">
+            <div class="headline-bar-pill"></div>
+            <div class="headline-title">Quick Actions</div>
+          </div>
+        </div>
+
+        <div class="menu-options-list" style="margin-top: 10px;">
+          <div class="menu-item-row" onclick="switchNavTab('home')">
+            <span>🎡 Lucky Spin Wheel</span>
+            <span>›</span>
+          </div>
+          <div class="menu-item-row" onclick="switchNavTab('invite')">
+            <span>🤝 Refer Friends (1 Refer = 1 Spin)</span>
+            <span>›</span>
+          </div>
+          <div class="menu-item-row" onclick="openCashoutModal()">
+            <span>💸 Withdraw Cash (Bank / UPI)</span>
+            <span>›</span>
+          </div>
+          <div class="menu-item-row" onclick="openOfficialTelegram()">
+            <span>💬 Official Telegram Channel</span>
+            <span>›</span>
+          </div>
+          <div class="menu-item-row" style="background:#f0fdf4;" onclick="openAdminPrompt()">
+            <span style="color:#0369a1; font-weight:800;">🛡️ Admin Control Panel</span>
+            <span>🔑</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Floating Glass Navigation Bar -->
+    <div class="bottom-glass-nav">
+      <!-- Home -->
+      <div class="nav-item active" id="nav-btn-home" onclick="switchNavTab('home')">
+        <div class="nav-icon-bg">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+          </svg>
+        </div>
+        <span class="nav-text">Home</span>
+      </div>
+
+      <!-- Invite -->
+      <div class="nav-item" id="nav-btn-invite" onclick="switchNavTab('invite')">
+        <div class="nav-icon-bg">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/>
+          </svg>
+        </div>
+        <span class="nav-text">Invite</span>
+      </div>
+
+      <!-- Wallet -->
+      <div class="nav-item" id="nav-btn-wallet" onclick="switchNavTab('wallet')">
+        <div class="nav-icon-bg">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          </svg>
+        </div>
+        <span class="nav-text">Wallet</span>
+      </div>
+
+      <!-- Profile -->
+      <div class="nav-item" id="nav-btn-profile" onclick="switchNavTab('profile')">
+        <div class="nav-icon-bg">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+        </div>
+        <span class="nav-text">Profile</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= POPUP MODALS ================= -->
+
+  <!-- 1. Telegram Official Modal -->
+  <div class="modal-backdrop" id="modalTelegram">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <button class="btn-dismiss-modal" onclick="closePopup('modalTelegram')">✕</button>
+      
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="width: 70px; height: 70px; border-radius: 50%; background: var(--primary-dark); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 8px 20px rgba(2, 132, 199, 0.45);">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.99 1.27-5.61 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.07-1.77 6.78-2.94 8.14-3.51 3.87-1.61 4.67-1.89 5.2-1.9.12 0 .38.03.55.17.14.12.18.28.2.45-.02.07-.02.16-.04.29z"/></svg>
+        </div>
+        <h3 style="font-size: 20px; font-weight: 900; color: #082f49;">Join Official Telegram</h3>
+        <p style="font-size: 12px; color: #64748b; margin-top: 4px;">Get latest payment proofs, giveaway codes & instant alerts!</p>
+      </div>
+
+      <button class="btn-join-telegram" style="width: 100%; justify-content: center; font-size: 14px; padding: 14px 0;" onclick="openOfficialTelegramChannel()">
+        <span>OPEN TELEGRAM CHANNEL</span>
+        <span>🚀</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 2. Cashout Modal (Bank & UPI) -->
+  <div class="modal-backdrop" id="modalWithdraw">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <button class="btn-dismiss-modal" onclick="closePopup('modalWithdraw')">✕</button>
+      
+      <div style="text-align: center; margin-bottom: 16px;">
+        <div style="font-size: 36px; margin-bottom: 4px;">💸</div>
+        <h3 style="font-size: 20px; font-weight: 900; color: #082f49;">Withdraw Cash</h3>
+        <p style="font-size: 12px; color: #64748b;">Minimum Withdrawal: <b id="minWithdrawLabel">₹20.00</b></p>
+      </div>
+
+      <!-- Payment Method Selection -->
+      <label style="font-size: 11px; font-weight: 800; color: #475569; display:block; margin-bottom:6px;">SELECT PAYMENT METHOD</label>
+      <div class="payout-tabs">
+        <div class="payout-tab-btn active-payout-tab" id="tabPayoutUpi" onclick="setPayoutMethod('upi')">
+          <span>⚡</span>
+          <span>UPI / GPay</span>
+        </div>
+        <div class="payout-tab-btn" id="tabPayoutBank" onclick="setPayoutMethod('bank')">
+          <span>🏦</span>
+          <span>Bank Transfer</span>
+        </div>
+      </div>
+
+      <!-- UPI Form Section -->
+      <div id="payoutSectionUpi">
+        <label style="font-size: 11px; font-weight: 800; color: #475569; display:block; margin-bottom:6px;">ENTER UPI ID (VPA)</label>
+        <input type="text" id="payoutUpiAddress" class="custom-input" placeholder="e.g. yourname@oksbi or 9876543210@paytm" />
+      </div>
+
+      <!-- Bank Form Section -->
+      <div id="payoutSectionBank" style="display:none;">
+        <label style="font-size: 11px; font-weight: 800; color: #475569; display:block; margin-bottom:6px;">ACCOUNT HOLDER NAME</label>
+        <input type="text" id="payoutBankHolderName" class="custom-input" placeholder="e.g. Rohit Kumar" />
+
+        <label style="font-size: 11px; font-weight: 800; color: #475569; display:block; margin-bottom:6px;">BANK NAME</label>
+        <input type="text" id="payoutBankName" class="custom-input" placeholder="e.g. State Bank of India" />
+
+        <label style="font-size: 11px; font-weight: 800; color: #475569; display:block; margin-bottom:6px;">BANK ACCOUNT NUMBER</label>
+        <input type="number" id="payoutBankAccountNumber" class="custom-input" placeholder="e.g. 123456789012" />
+
+        <label style="font-size: 11px; font-weight: 800; color: #475569; display:block; margin-bottom:6px;">IFSC CODE</label>
+        <input type="text" id="payoutBankIfsc" class="custom-input" placeholder="e.g. SBIN0001234" style="text-transform:uppercase;" />
+      </div>
+
+      <!-- Withdrawal Amount Field -->
+      <label style="font-size: 11px; font-weight: 800; color: #475569; display:block; margin-bottom:6px; margin-top:6px;">WITHDRAWAL AMOUNT</label>
+      <input type="number" id="payoutAmountInput" class="custom-input" placeholder="Enter amount" value="20" min="20" />
+
+      <div style="background:#f0f9ff; border:1px solid #bae6fd; border-radius:12px; padding:10px; font-size:11.5px; color:#0369a1; margin-bottom:14px;">
+        💰 Current Wallet Balance: <b style="color:var(--primary-dark);" id="payoutModalBalance">₹0.00</b>
+      </div>
+
+      <button class="btn-join-telegram" style="width: 100%; justify-content: center; font-size: 14px; padding: 14px 0; background:linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%); box-shadow:0 6px 16px rgba(2,132,199,0.45);" onclick="submitPayout()">
+        <span>CONFIRM WITHDRAWAL</span>
+        <span>🚀</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 3. Admin Control Panel Modal -->
+  <div class="modal-backdrop" id="modalAdminPanel">
+    <div class="modal-sheet" style="max-height:92vh;">
+      <div class="sheet-handle"></div>
+      <button class="btn-dismiss-modal" onclick="closePopup('modalAdminPanel')">✕</button>
+      
+      <div style="text-align: center; margin-bottom: 14px;">
+        <h3 style="font-size: 20px; font-weight: 900; color: #082f49;">🛡️ Admin Control Panel</h3>
+        <p style="font-size: 11.5px; color: #64748b;">Manage Withdrawals, Theme Colors, Spins & Bot Settings</p>
+      </div>
+
+      <!-- Admin Navigation Chips -->
+      <div class="admin-nav-tabs">
+        <div class="admin-tab-chip active" id="chipTabWithdrawals" onclick="switchAdminSubTab('withdrawals')">💸 Withdrawals (<span id="adminPendingCount">0</span>)</div>
+        <div class="admin-tab-chip" id="chipTabThemes" onclick="switchAdminSubTab('themes')">🎨 Colors & Theme</div>
+        <div class="admin-tab-chip" id="chipTabSettings" onclick="switchAdminSubTab('settings')">⚙️ Bot & App Settings</div>
+        <div class="admin-tab-chip" id="chipTabUsers" onclick="switchAdminSubTab('users')">👥 User Spins</div>
+      </div>
+
+      <!-- SUB-TAB 1: Withdrawals Manager -->
+      <div id="adminSecWithdrawals">
+        <div style="font-size:12px; font-weight:800; color:#082f49; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+          <span>User Withdrawal Requests:</span>
+          <button style="background:none; border:none; color:var(--primary-dark); font-weight:800; font-size:11px; cursor:pointer;" onclick="renderAdminWithdrawals()">🔄 Refresh</button>
+        </div>
+        <div id="adminWithdrawalsList">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- SUB-TAB 2: Theme & Color Customizer -->
+      <div id="adminSecThemes" style="display:none;">
+        <div class="admin-card-box">
+          <div style="font-size:12.5px; font-weight:800; color:#082f49; margin-bottom:4px;">One-Click Color Presets:</div>
+          <div class="color-preset-grid">
+            <div class="color-preset-btn" style="background:linear-gradient(135deg, #0ea5e9, #0284c7);" onclick="applyColorPreset('skyblue')">Sky Blue</div>
+            <div class="color-preset-btn" style="background:linear-gradient(135deg, #3b82f6, #1d4ed8);" onclick="applyColorPreset('sapphire')">Sapphire</div>
+            <div class="color-preset-btn" style="background:linear-gradient(135deg, #8b5cf6, #581c87);" onclick="applyColorPreset('purple')">Purple</div>
+            <div class="color-preset-btn" style="background:linear-gradient(135deg, #10b981, #047857);" onclick="applyColorPreset('emerald')">Emerald</div>
+            <div class="color-preset-btn" style="background:linear-gradient(135deg, #f59e0b, #b45309);" onclick="applyColorPreset('gold')">Gold Sunset</div>
+            <div class="color-preset-btn" style="background:linear-gradient(135deg, #ef4444, #991b1b);" onclick="applyColorPreset('crimson')">Cyber Red</div>
+          </div>
+
+          <div style="font-size:12px; font-weight:800; color:#082f49; margin-bottom:6px;">Custom Color Pickers:</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+            <div>
+              <label style="font-size:10.5px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Primary Color</label>
+              <input type="color" id="adminCustomPrimaryColor" class="custom-input" style="height:42px; padding:2px; cursor:pointer;" value="#0ea5e9" onchange="applyCustomColorsLive()" />
+            </div>
+            <div>
+              <label style="font-size:10.5px; font-weight:700; color:#475569; display:block; margin-bottom:4px;">Glow / Accent Color</label>
+              <input type="color" id="adminCustomGlowColor" class="custom-input" style="height:42px; padding:2px; cursor:pointer;" value="#38bdf8" onchange="applyCustomColorsLive()" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 3: Bot & App Settings -->
+      <div id="adminSecSettings" style="display:none;">
+        <div class="admin-card-box">
+          <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">TELEGRAM BOT USERNAME (Without @)</label>
+          <input type="text" id="adminBotUsernameInput" class="custom-input" placeholder="e.g. RohitGiveawayBot" />
+
+          <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">OFFICIAL TELEGRAM CHANNEL LINK</label>
+          <input type="text" id="adminChannelUrlInput" class="custom-input" placeholder="e.g. https://t.me/RohitGiveaway" />
+
+          <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">APP TITLE</label>
+          <input type="text" id="adminAppTitleInput" class="custom-input" placeholder="e.g. Rohit Giveaway" />
+
+          <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">SPIN WIN AMOUNT (₹)</label>
+          <input type="number" id="adminSpinWinAmountInput" class="custom-input" value="5" min="1" />
+
+          <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">MINIMUM WITHDRAWAL LIMIT (₹)</label>
+          <input type="number" id="adminMinWithdrawInput" class="custom-input" value="20" min="1" />
+
+          <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">CHANGE ADMIN PIN</label>
+          <input type="text" id="adminNewPinInput" class="custom-input" placeholder="Current PIN: 7777" />
+
+          <button class="btn-join-telegram" style="width:100%; justify-content:center; padding:12px; margin-top:6px;" onclick="saveAdminSettings()">
+            <span>SAVE ALL SETTINGS</span>
+            <span>💾</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 4: User Spins & Balance Controller -->
+      <div id="adminSecUsers" style="display:none;">
+        <div class="admin-card-box">
+          <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">TARGET USER ID</label>
+          <input type="text" id="adminTargetUserId" class="custom-input" placeholder="Enter User ID (or leave blank for yourself)" />
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <div>
+              <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">ADD/SET SPINS</label>
+              <input type="number" id="adminUserSpinsAdd" class="custom-input" placeholder="e.g. 5" />
+            </div>
+            <div>
+              <label style="font-size:11px; font-weight:800; color:#475569; display:block; margin-bottom:4px;">ADD/SET BALANCE (₹)</label>
+              <input type="number" id="adminUserBalanceAdd" class="custom-input" placeholder="e.g. 50" />
+            </div>
+          </div>
+
+          <button class="btn-join-telegram" style="width:100%; justify-content:center; padding:12px; margin-top:6px;" onclick="adminApplyUserCredits()">
+            <span>UPDATE USER SPINS & BALANCE</span>
+            <span>⚡</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APP ENGINE -->
+  <script>
+    // System Settings with LocalStorage persistence
+    const defaultSettings = {
+      botUsername: 'RohitGiveawayBot',
+      channelUrl: 'https://t.me/RohitGiveaway',
+      appTitle: 'Rohit Giveaway',
+      appSubtitle: 'TELEGRAM MINI APP',
+      spinWinAmount: 5.00,
+      minWithdrawAmount: 20.00,
+      adminPin: '7777',
+      primaryColor: '#0ea5e9',
+      primaryDark: '#0284c7',
+      primaryDeep: '#0369a1',
+      glowColor: '#38bdf8',
+      bgTop: '#0284c7',
+      bgMid: '#0ea5e9'
+    };
+
+    function loadSettings() {
+      try {
+        const saved = localStorage.getItem('rg_app_settings');
+        if (saved) return { ...defaultSettings, ...JSON.parse(saved) };
+      } catch(e) {}
+      return { ...defaultSettings };
+    }
+
+    let appSettings = loadSettings();
+
+    // User State Store
+    let currentUser = {
+      id: '88491204',
+      name: 'Rohit User',
+      username: '',
+      balance: 0.00,
+      spinsAvailable: 0,
+      referralsCount: 0,
+      spinsEarnedTotal: 0,
+      referredBy: null,
+      transactions: []
+    };
+
+    function loadUserData() {
+      try {
+        const saved = localStorage.getItem('rg_current_user');
+        if (saved) {
+          currentUser = { ...currentUser, ...JSON.parse(saved) };
+        } else {
+          // Generate unique ID for non-telegram browser session
+          currentUser.id = Math.floor(10000000 + Math.random() * 90000000).toString();
+        }
+      } catch(e) {}
+    }
+
+    function saveUserData() {
+      try {
+        localStorage.setItem('rg_current_user', JSON.stringify(currentUser));
+        // Also save to all users dictionary for referral handling & admin
+        let allUsers = JSON.parse(localStorage.getItem('rg_all_users') || '{}');
+        allUsers[currentUser.id] = currentUser;
+        localStorage.setItem('rg_all_users', JSON.stringify(allUsers));
+      } catch(e) {}
+    }
+
+    // Withdrawals Database
+    function loadWithdrawals() {
+      try {
+        return JSON.parse(localStorage.getItem('rg_withdrawals') || '[]');
+      } catch(e) { return []; }
+    }
+
+    function saveWithdrawals(list) {
+      try {
+        localStorage.setItem('rg_withdrawals', JSON.stringify(list));
+      } catch(e) {}
+    }
+
+    // Wheel Slice Configuration (Amounts: 5, 10, 20, 50, 100, 500)
+    const wheelSlices = [
+      { amount: 5, label: '₹5', bg: '#0284c7', text: '#ffffff' },
+      { amount: 10, label: '₹10', bg: '#8b5cf6', text: '#ffffff' },
+      { amount: 20, label: '₹20', bg: '#ec4899', text: '#ffffff' },
+      { amount: 50, label: '₹50', bg: '#f59e0b', text: '#ffffff' },
+      { amount: 100, label: '₹100', bg: '#06b6d4', text: '#ffffff' },
+      { amount: 500, label: '₹500', bg: '#e11d48', text: '#ffffff' }
+    ];
+
+    let currentWheelRotation = 0;
+    let isWheelSpinning = false;
+    let payoutMethod = 'upi';
+    let logoTapCount = 0;
+    let logoTapTimer = null;
+
+    // Web Audio Synthesizer
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function triggerAudio(kind) {
+      if (!audioContext) return;
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      
+      const time = audioContext.currentTime;
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+
+      if (kind === 'coin') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(987.77, time);
+        osc.frequency.setValueAtTime(1318.51, time + 0.08);
+        gain.gain.setValueAtTime(0.2, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.35);
+        osc.start(time);
+        osc.stop(time + 0.35);
+      } else if (kind === 'win') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, time);
+        osc.frequency.setValueAtTime(659.25, time + 0.1);
+        osc.frequency.setValueAtTime(783.99, time + 0.2);
+        osc.frequency.setValueAtTime(1046.50, time + 0.3);
+        gain.gain.setValueAtTime(0.25, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.65);
+        osc.start(time);
+        osc.stop(time + 0.65);
+      } else if (kind === 'tick') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, time);
+        gain.gain.setValueAtTime(0.06, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.04);
+        osc.start(time);
+        osc.stop(time + 0.04);
+      } else {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440, time);
+        gain.gain.setValueAtTime(0.1, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.08);
+        osc.start(time);
+        osc.stop(time + 0.08);
+      }
+    }
+
+    // Telegram Haptic
+    function triggerHaptic() {
+      if (window.Telegram && Telegram.WebApp && Telegram.WebApp.HapticFeedback) {
+        Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+      }
+    }
+
+    // Draw Wheel on Canvas
+    function drawLuckyWheel() {
+      const canvas = document.getElementById('luckyWheelCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const numSlices = wheelSlices.length;
+      const sliceAngle = (2 * Math.PI) / numSlices;
+      const radius = canvas.width / 2;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < numSlices; i++) {
+        const startAngle = i * sliceAngle;
+        const endAngle = startAngle + sliceAngle;
+        const slice = wheelSlices[i];
+
+        ctx.beginPath();
+        ctx.moveTo(radius, radius);
+        ctx.arc(radius, radius, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = slice.bg;
+        ctx.fill();
+
+        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(radius, radius);
+        ctx.rotate(startAngle + sliceAngle / 2);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = slice.text;
+        ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
+        ctx.shadowBlur = 4;
+        ctx.fillText(slice.label, radius - 24, 6);
+        ctx.restore();
+      }
+    }
+
+    // Direct Spin Engine — spin is granted by the SERVER (real referral-based
+    // spins tracked in bot_data.json), not decided locally in the browser.
+    async function triggerDirectSpin() {
+      if (isWheelSpinning) return;
+
+      if (currentUser.spinsAvailable <= 0) {
+        triggerAudio('click');
+        triggerHaptic();
+        showAppToast('No spins left! Refer friends on Telegram to get +1 Free Spin!', '⚠️');
+        switchNavTab('invite');
+        return;
+      }
+
+      isWheelSpinning = true;
+      triggerAudio('click');
+      triggerHaptic();
+      const canvas = document.getElementById('luckyWheelCanvas');
+
+      let tickCount = 0;
+      const tickInterval = setInterval(() => {
+        triggerAudio('tick');
+        tickCount++;
+        if (tickCount > 24) clearInterval(tickInterval);
+      }, 150);
+
+      // Ask the backend to actually consume a spin & decide the win amount.
+      let spinResult;
+      try {
+        const res = await fetch('/api/spin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ telegram_id: currentUser.id })
+        });
+        spinResult = await res.json();
+      } catch (e) {
+        spinResult = { success: false, message: 'Network error' };
+      }
+
+      if (!spinResult.success) {
+        isWheelSpinning = false;
+        clearInterval(tickInterval);
+        showAppToast(spinResult.message || 'Spin failed, try again', '⚠️');
+        return;
+      }
+
+      // Top pointer is at 12 o'clock (270° on canvas).
+      // Slice 0 (₹5, center 30°): target base angle = (270° - 30°) = 240°.
+      const targetBaseAngle = 240;
+      const jitter = (Math.random() - 0.5) * 16;
+      const fullRotations = (5 + Math.floor(Math.random() * 3)) * 360;
+
+      const currentMod = currentWheelRotation % 360;
+      const neededRotation = (targetBaseAngle - currentMod + 360) % 360;
+      const newTargetRotation = currentWheelRotation + fullRotations + neededRotation + jitter;
+      currentWheelRotation = newTargetRotation;
+
+      canvas.style.transform = `rotate(${newTargetRotation}deg)`;
+
+      setTimeout(() => {
+        isWheelSpinning = false;
+        clearInterval(tickInterval);
+
+        // Apply the real server result to local UI state
+        currentUser.balance = spinResult.wallet;
+        currentUser.spinsAvailable = spinResult.spins_available;
+        currentUser.spinsEarnedTotal = spinResult.spins_earned_total;
+        currentUser.transactions.unshift({
+          title: `Lucky Spin Win (₹${spinResult.won_amount.toFixed(2)})`,
+          time: 'Just now',
+          amount: spinResult.won_amount,
+          type: 'credit'
+        });
+
+        syncBalanceDisplay();
+        renderTransactionList();
+
+        triggerAudio('win');
+        triggerHaptic();
+        fireConfetti();
+        showAppToast(`🎉 Congratulations! You won ₹${spinResult.won_amount.toFixed(2)}!`, '🎡');
+        updateSpinsUI();
+      }, 4000);
+    }
+
+    // UI Updates
+    function updateSpinsUI() {
+      const spinsEl = document.getElementById('homeSpinsCount');
+      const btnSpinAction = document.getElementById('btnHomeSpinAction');
+      const btnSpinText = document.getElementById('btnHomeSpinText');
+      const statSpinsEarned = document.getElementById('statSpinsEarned');
+      const statInvitesCount = document.getElementById('statInvitesCount');
+
+      if (spinsEl) spinsEl.innerText = currentUser.spinsAvailable;
+      if (statSpinsEarned) statSpinsEarned.innerText = currentUser.spinsEarnedTotal;
+      if (statInvitesCount) statInvitesCount.innerText = currentUser.referralsCount;
+
+      if (btnSpinAction && btnSpinText) {
+        if (currentUser.spinsAvailable > 0) {
+          btnSpinText.innerText = `SPIN NOW (${currentUser.spinsAvailable} SPIN${currentUser.spinsAvailable > 1 ? 'S' : ''} LEFT)`;
+          btnSpinAction.classList.add('pulse-glow');
+        } else {
+          btnSpinText.innerText = `REFER FRIENDS TO GET SPINS`;
+          btnSpinAction.classList.remove('pulse-glow');
+        }
+      }
+    }
+
+    // Balance Operations
+    function creditWalletBalance(amount, reason) {
+      currentUser.balance += amount;
+      currentUser.transactions.unshift({
+        id: Date.now(),
+        title: reason,
+        time: 'Just now',
+        amount: amount,
+        type: 'credit'
+      });
+      saveUserData();
+      syncBalanceDisplay();
+      renderTransactionList();
+    }
+
+    function syncBalanceDisplay() {
+      const formatted = currentUser.balance.toFixed(2);
+      document.getElementById('topBalance').innerText = formatted;
+      document.getElementById('walletPageBalance').innerText = `₹ ${formatted}`;
+      const modalBal = document.getElementById('payoutModalBalance');
+      if (modalBal) modalBal.innerText = `₹${formatted}`;
+    }
+
+    function renderTransactionList() {
+      const feed = document.getElementById('transactionFeed');
+      if (!feed) return;
+      if (currentUser.transactions.length === 0) {
+        feed.innerHTML = `
+          <div style="text-align:center; padding:24px; color:#94a3b8; font-size:12.5px; font-weight:600;">
+            No transactions yet. Refer friends on Telegram to get spins & earn!
+          </div>
+        `;
+        return;
+      }
+
+      feed.innerHTML = currentUser.transactions.map(tx => `
+        <div class="transaction-row">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:36px; height:36px; border-radius:50%; background:${tx.type === 'credit' ? '#e0f2fe' : '#fee2e2'}; display:flex; align-items:center; justify-content:center; font-size:16px;">
+              ${tx.type === 'credit' ? '🎡' : '💸'}
+            </div>
+            <div>
+              <div style="font-size:13px; font-weight:800; color:#082f49;">${tx.title}</div>
+              <div style="font-size:10px; font-weight:600; color:#64748b;">${tx.time}</div>
+            </div>
+          </div>
+          <div style="font-size:14px; font-weight:900; color:${tx.type === 'credit' ? 'var(--primary-dark)' : '#ef4444'};">
+            ${tx.type === 'credit' ? '+' : '-'} ₹${tx.amount.toFixed(2)}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Navigation Switcher
+    function switchNavTab(tab) {
+      triggerAudio('click');
+      triggerHaptic();
+      const tabs = ['home', 'invite', 'wallet', 'profile'];
+      tabs.forEach(t => {
+        const view = document.getElementById(`tab-view-${t}`);
+        const navBtn = document.getElementById(`nav-btn-${t}`);
+        if (t === tab) {
+          view.classList.add('active-tab');
+          navBtn.classList.add('active');
+        } else {
+          view.classList.remove('active-tab');
+          navBtn.classList.remove('active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Modal Handlers
+    function openPopup(modalId) {
+      triggerAudio('click');
+      triggerHaptic();
+      document.getElementById(modalId).classList.add('active-modal');
+    }
+
+    function closePopup(modalId) {
+      triggerAudio('click');
+      document.getElementById(modalId).classList.remove('active-modal');
+    }
+
+    // Toast Popups
+    let toastTimer;
+    function showAppToast(msg, icon = '✨') {
+      const toast = document.getElementById('appToast');
+      document.getElementById('toastMessage').innerText = msg;
+      document.getElementById('toastIcon').innerText = icon;
+      toast.classList.add('visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('visible');
+      }, 3000);
+    }
+
+    // Referral Link Engine
+    function getBotReferralLink() {
+      const bot = appSettings.botUsername.replace('@', '').trim();
+      return `https://t.me/${bot}?start=ref_${currentUser.id}`;
+    }
+
+    function copyReferralLink() {
+      const link = getBotReferralLink();
+      navigator.clipboard.writeText(link);
+      triggerAudio('coin');
+      triggerHaptic();
+      showAppToast(`Bot Referral Link copied!`, '📋');
+    }
+
+    function shareOnTelegram() {
+      const link = getBotReferralLink();
+      const shareText = `🎁 Join Rohit Giveaway on Telegram! Spin the Lucky Wheel to win instant cash:`;
+      const tgShareUrl = `https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(shareText)}`;
+      
+      triggerAudio('coin');
+      triggerHaptic();
+
+      if (window.Telegram && Telegram.WebApp && Telegram.WebApp.openTelegramLink) {
+        Telegram.WebApp.openTelegramLink(tgShareUrl);
+      } else {
+        window.open(tgShareUrl, '_blank');
+      }
+    }
+
+    function openOfficialTelegram() {
+      openPopup('modalTelegram');
+    }
+
+    function openOfficialTelegramChannel() {
+      closePopup('modalTelegram');
+      const url = appSettings.channelUrl || 'https://t.me/RohitGiveaway';
+      if (window.Telegram && Telegram.WebApp && Telegram.WebApp.openTelegramLink) {
+        Telegram.WebApp.openTelegramLink(url);
+      } else {
+        window.open(url, '_blank');
+      }
+    }
+
+    // Cashout Operations
+    function openCashoutModal() {
+      syncBalanceDisplay();
+      document.getElementById('minWithdrawLabel').innerText = `₹${(parseFloat(appSettings.minWithdrawAmount) || 20).toFixed(2)}`;
+      document.getElementById('payoutAmountInput').min = appSettings.minWithdrawAmount || 20;
+      document.getElementById('payoutAmountInput').value = appSettings.minWithdrawAmount || 20;
+      openPopup('modalWithdraw');
+    }
+
+    function setPayoutMethod(method) {
+      triggerAudio('click');
+      payoutMethod = method;
+      const tabUpi = document.getElementById('tabPayoutUpi');
+      const tabBank = document.getElementById('tabPayoutBank');
+      const secUpi = document.getElementById('payoutSectionUpi');
+      const secBank = document.getElementById('payoutSectionBank');
+
+      if (method === 'upi') {
+        tabUpi.classList.add('active-payout-tab');
+        tabBank.classList.remove('active-payout-tab');
+        secUpi.style.display = 'block';
+        secBank.style.display = 'none';
+      } else {
+        tabBank.classList.add('active-payout-tab');
+        tabUpi.classList.remove('active-payout-tab');
+        secBank.style.display = 'block';
+        secUpi.style.display = 'none';
+      }
+    }
+
+    async function submitPayout() {
+      const minLimit = parseFloat(appSettings.minWithdrawAmount) || 20.00;
+      const amount = parseFloat(document.getElementById('payoutAmountInput').value);
+
+      if (isNaN(amount) || amount < minLimit) {
+        showAppToast(`Minimum withdrawal amount is ₹${minLimit.toFixed(2)}!`, '⚠️');
+        return;
+      }
+
+      if (amount > currentUser.balance) {
+        showAppToast(`Insufficient balance! You have ₹${currentUser.balance.toFixed(2)}`, '⚠️');
+        return;
+      }
+
+      let reqDetails = {
+        id: 'WD-' + Date.now().toString().slice(-6),
+        userId: currentUser.id,
+        userName: currentUser.name,
+        amount: amount,
+        time: new Date().toLocaleString(),
+        status: 'pending',
+        method: payoutMethod
+      };
+
+      if (payoutMethod === 'upi') {
+        const upi = document.getElementById('payoutUpiAddress').value.trim();
+        if (!upi || upi.length < 5 || !upi.includes('@')) {
+          showAppToast('Please enter a valid UPI ID (e.g. name@okaxis)', '⚠️');
+          return;
+        }
+        reqDetails.destination = upi;
+        reqDetails.detailsText = `UPI: ${upi}`;
+      } else {
+        const holderName = document.getElementById('payoutBankHolderName').value.trim();
+        const bankName = document.getElementById('payoutBankName').value.trim();
+        const accNum = document.getElementById('payoutBankAccountNumber').value.trim();
+        const ifsc = document.getElementById('payoutBankIfsc').value.trim().toUpperCase();
+
+        if (!holderName || !bankName || accNum.length < 8 || ifsc.length < 5) {
+          showAppToast('Please fill all Bank details properly!', '⚠️');
+          return;
+        }
+        reqDetails.destination = `${accNum} (${ifsc})`;
+        reqDetails.detailsText = `Bank: ${bankName} | A/C: ${accNum} | IFSC: ${ifsc} | Name: ${holderName}`;
+      }
+
+      // Send the request to the real backend (saved for manual review — demo, no auto payout)
+      try {
+        const res = await fetch('/api/withdraw', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            telegram_id: currentUser.id,
+            amount: amount,
+            upi_id: reqDetails.detailsText
+          })
+        });
+        const data = await res.json();
+        if (!data.success) {
+          showAppToast(data.message || 'Withdrawal request failed', '⚠️');
+          return;
+        }
+      } catch (e) {
+        showAppToast('Could not reach server — try again', '⚠️');
+        return;
+      }
+
+      // Deduct balance locally and record withdrawal in the visible transaction feed
+      currentUser.balance -= amount;
+      currentUser.transactions.unshift({
+        id: Date.now(),
+        title: `Withdrawal Request (${reqDetails.destination})`,
+        time: 'Just now',
+        amount: amount,
+        type: 'debit'
+      });
+      saveUserData();
+      syncBalanceDisplay();
+      renderTransactionList();
+
+      // Save to withdrawals list for Admin Panel
+      const wList = loadWithdrawals();
+      wList.unshift(reqDetails);
+      saveWithdrawals(wList);
+
+      closePopup('modalWithdraw');
+      triggerAudio('win');
+      triggerHaptic();
+      fireConfetti();
+      showAppToast(`Withdrawal of ₹${amount.toFixed(2)} submitted to Admin!`, '🚀');
+    }
+
+    // ================= ADMIN PANEL ENGINE =================
+    function handleLogoTripleTap(e) {
+      e.stopPropagation();
+      logoTapCount++;
+      clearTimeout(logoTapTimer);
+      if (logoTapCount >= 3) {
+        logoTapCount = 0;
+        openAdminPrompt();
+      } else {
+        logoTapTimer = setTimeout(() => { logoTapCount = 0; }, 1200);
+      }
+    }
+
+    function openAdminPrompt() {
+      const pin = prompt('Enter Admin Passcode (Default: 7777):');
+      if (pin === appSettings.adminPin) {
+        openAdminDashboard();
+      } else if (pin !== null) {
+        showAppToast('Invalid Admin Passcode!', '❌');
+      }
+    }
+
+    function openAdminDashboard() {
+      document.getElementById('adminBotUsernameInput').value = appSettings.botUsername;
+      document.getElementById('adminChannelUrlInput').value = appSettings.channelUrl;
+      document.getElementById('adminAppTitleInput').value = appSettings.appTitle;
+      document.getElementById('adminSpinWinAmountInput').value = appSettings.spinWinAmount;
+      document.getElementById('adminMinWithdrawInput').value = appSettings.minWithdrawAmount;
+      document.getElementById('adminCustomPrimaryColor').value = appSettings.primaryColor;
+      document.getElementById('adminCustomGlowColor').value = appSettings.glowColor;
+
+      renderAdminWithdrawals();
+      openPopup('modalAdminPanel');
+    }
+
+    function switchAdminSubTab(tab) {
+      const tabs = ['withdrawals', 'themes', 'settings', 'users'];
+      tabs.forEach(t => {
+        document.getElementById(`adminSec${capitalize(t)}`).style.display = (t === tab) ? 'block' : 'none';
+        document.getElementById(`chipTab${capitalize(t)}`).classList.toggle('active', t === tab);
+      });
+    }
+
+    function capitalize(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
+
+    function renderAdminWithdrawals() {
+      const list = loadWithdrawals();
+      const container = document.getElementById('adminWithdrawalsList');
+      const pendingCountEl = document.getElementById('adminPendingCount');
+      
+      const pendingCount = list.filter(w => w.status === 'pending').length;
+      if (pendingCountEl) pendingCountEl.innerText = pendingCount;
+
+      if (list.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:20px; color:#94a3b8; font-size:12px;">No withdrawal requests yet.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map((w, idx) => `
+        <div class="withdrawal-item-card ${w.status}">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px;">
+            <div>
+              <span style="font-size:11px; font-weight:800; color:#64748b;">REQ ID: ${w.id}</span>
+              <div style="font-size:13px; font-weight:900; color:#082f49;">User ID: ${w.userId} (${w.userName || 'User'})</div>
+            </div>
+            <div style="font-size:16px; font-weight:900; color:${w.status === 'approved' ? '#10b981' : (w.status === 'rejected' ? '#ef4444' : '#f59e0b')};">
+              ₹${parseFloat(w.amount).toFixed(2)}
+            </div>
+          </div>
+          <div style="font-size:11.5px; color:#334155; margin-bottom:6px; word-break:break-all;">
+            <b>Details:</b> ${w.detailsText || w.destination}
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:10.5px; color:#94a3b8;">
+            <span>${w.time}</span>
+            <span style="font-weight:800; text-transform:uppercase;">Status: ${w.status}</span>
+          </div>
+
+          ${w.status === 'pending' ? `
+            <div style="display:flex; gap:8px; margin-top:10px;">
+              <button style="flex:1; background:#10b981; color:#fff; border:none; padding:8px; border-radius:10px; font-weight:800; font-size:11.5px; cursor:pointer;" onclick="adminApproveWithdrawal(${idx})">
+                ✔ Mark as Paid
+              </button>
+              <button style="flex:1; background:#ef4444; color:#fff; border:none; padding:8px; border-radius:10px; font-weight:800; font-size:11.5px; cursor:pointer;" onclick="adminRejectWithdrawal(${idx})">
+                ✖ Reject & Refund
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      `).join('');
+    }
+
+    function adminApproveWithdrawal(idx) {
+      const list = loadWithdrawals();
+      if (!list[idx]) return;
+      list[idx].status = 'approved';
+      saveWithdrawals(list);
+      renderAdminWithdrawals();
+      triggerAudio('win');
+      showAppToast(`Withdrawal #${list[idx].id} marked as Paid!`, '✅');
+    }
+
+    function adminRejectWithdrawal(idx) {
+      const list = loadWithdrawals();
+      if (!list[idx]) return;
+      const req = list[idx];
+      req.status = 'rejected';
+      saveWithdrawals(list);
+
+      // Refund if this user is current user or in dictionary
+      if (req.userId === currentUser.id) {
+        creditWalletBalance(req.amount, `Withdrawal Refund (${req.id})`);
+      } else {
+        let allUsers = JSON.parse(localStorage.getItem('rg_all_users') || '{}');
+        if (allUsers[req.userId]) {
+          allUsers[req.userId].balance = (parseFloat(allUsers[req.userId].balance) || 0) + req.amount;
+          localStorage.setItem('rg_all_users', JSON.stringify(allUsers));
+        }
+      }
+
+      renderAdminWithdrawals();
+      showAppToast(`Withdrawal #${req.id} rejected and refunded!`, '↩️');
+    }
+
+    // Theme Presets & Customizer
+    const themePresets = {
+      skyblue: { primary: '#0ea5e9', dark: '#0284c7', deep: '#0369a1', glow: '#38bdf8', bgTop: '#0284c7', bgMid: '#0ea5e9' },
+      sapphire: { primary: '#3b82f6', dark: '#1d4ed8', deep: '#1e3a8a', glow: '#60a5fa', bgTop: '#1d4ed8', bgMid: '#3b82f6' },
+      purple: { primary: '#8b5cf6', dark: '#6d28d9', deep: '#4c1d95', glow: '#a78bfa', bgTop: '#6d28d9', bgMid: '#8b5cf6' },
+      emerald: { primary: '#10b981', dark: '#047857', deep: '#064e3b', glow: '#34d399', bgTop: '#047857', bgMid: '#10b981' },
+      gold: { primary: '#f59e0b', dark: '#b45309', deep: '#78350f', glow: '#fbbf24', bgTop: '#b45309', bgMid: '#f59e0b' },
+      crimson: { primary: '#ef4444', dark: '#b91c1c', deep: '#7f1d1d', glow: '#f87171', bgTop: '#b91c1c', bgMid: '#ef4444' }
+    };
+
+    function applyColorPreset(presetKey) {
+      const p = themePresets[presetKey];
+      if (!p) return;
+      appSettings.primaryColor = p.primary;
+      appSettings.primaryDark = p.dark;
+      appSettings.primaryDeep = p.deep;
+      appSettings.glowColor = p.glow;
+      appSettings.bgTop = p.bgTop;
+      appSettings.bgMid = p.bgMid;
+      applyAppTheme();
+      saveSettingsDirectly();
+      showAppToast(`${presetKey.toUpperCase()} theme applied!`, '🎨');
+    }
+
+    function applyCustomColorsLive() {
+      const primary = document.getElementById('adminCustomPrimaryColor').value;
+      const glow = document.getElementById('adminCustomGlowColor').value;
+      appSettings.primaryColor = primary;
+      appSettings.primaryDark = primary;
+      appSettings.primaryDeep = primary;
+      appSettings.glowColor = glow;
+      appSettings.bgTop = primary;
+      appSettings.bgMid = glow;
+      applyAppTheme();
+      saveSettingsDirectly();
+    }
+
+    function applyAppTheme() {
+      document.documentElement.style.setProperty('--primary-color', appSettings.primaryColor);
+      document.documentElement.style.setProperty('--primary-dark', appSettings.primaryDark);
+      document.documentElement.style.setProperty('--primary-deep', appSettings.primaryDeep);
+      document.documentElement.style.setProperty('--glow-color', appSettings.glowColor);
+      document.documentElement.style.setProperty('--bg-gradient-top', appSettings.bgTop);
+      document.documentElement.style.setProperty('--bg-gradient-mid', appSettings.bgMid);
+
+      document.getElementById('brandTitleDisplay').innerText = appSettings.appTitle;
+      document.getElementById('walletMinBadgeDisplay').innerText = `Min ₹${appSettings.minWithdrawAmount} Payout`;
+      document.getElementById('referralCodeText').innerText = getBotReferralLink();
+    }
+
+    function saveSettingsDirectly() {
+      try {
+        localStorage.setItem('rg_app_settings', JSON.stringify(appSettings));
+      } catch(e) {}
+    }
+
+    function saveAdminSettings() {
+      appSettings.botUsername = document.getElementById('adminBotUsernameInput').value.trim();
+      appSettings.channelUrl = document.getElementById('adminChannelUrlInput').value.trim();
+      appSettings.appTitle = document.getElementById('adminAppTitleInput').value.trim() || 'Rohit Giveaway';
+      appSettings.spinWinAmount = parseFloat(document.getElementById('adminSpinWinAmountInput').value) || 5;
+      appSettings.minWithdrawAmount = parseFloat(document.getElementById('adminMinWithdrawInput').value) || 20;
+
+      const newPin = document.getElementById('adminNewPinInput').value.trim();
+      if (newPin && newPin.length >= 4) {
+        appSettings.adminPin = newPin;
+      }
+
+      saveSettingsDirectly();
+      applyAppTheme();
+      showAppToast('Admin settings saved successfully!', '✅');
+    }
+
+    function adminApplyUserCredits() {
+      const targetId = document.getElementById('adminTargetUserId').value.trim();
+      const spinsToAdd = parseInt(document.getElementById('adminUserSpinsAdd').value) || 0;
+      const balanceToAdd = parseFloat(document.getElementById('adminUserBalanceAdd').value) || 0;
+
+      if (!targetId || targetId === currentUser.id) {
+        currentUser.spinsAvailable += spinsToAdd;
+        currentUser.spinsEarnedTotal += spinsToAdd;
+        currentUser.balance += balanceToAdd;
+        saveUserData();
+        syncBalanceDisplay();
+        updateSpinsUI();
+        showAppToast(`Added ${spinsToAdd} Spins & ₹${balanceToAdd.toFixed(2)} to your account!`, '⚡');
+      } else {
+        let allUsers = JSON.parse(localStorage.getItem('rg_all_users') || '{}');
+        if (!allUsers[targetId]) {
+          allUsers[targetId] = { id: targetId, name: 'User', balance: 0, spinsAvailable: 0, spinsEarnedTotal: 0 };
+        }
+        allUsers[targetId].spinsAvailable += spinsToAdd;
+        allUsers[targetId].spinsEarnedTotal += spinsToAdd;
+        allUsers[targetId].balance += balanceToAdd;
+        localStorage.setItem('rg_all_users', JSON.stringify(allUsers));
+        showAppToast(`Updated User #${targetId} (+${spinsToAdd} Spins, +₹${balanceToAdd.toFixed(2)})`, '⚡');
+      }
+    }
+
+    // ================= TELEGRAM APP INIT (REAL BACKEND VERSION) =================
+    // Referral tracking now happens server-side in bot.py the moment a friend
+    // taps your link and messages the bot (/start <your_id>) — no localStorage
+    // simulation needed here. This just auto-fills the profile and then pulls
+    // the real wallet / spins / referral count from the backend.
+    function initTelegramMiniApp() {
+      if (window.Telegram && Telegram.WebApp) {
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+
+        const tgUser = Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user;
+        if (tgUser) {
+          currentUser.id = tgUser.id ? tgUser.id.toString() : currentUser.id;
+          currentUser.name = tgUser.first_name + (tgUser.last_name ? ' ' + tgUser.last_name : '');
+          currentUser.username = tgUser.username || '';
+
+          document.getElementById('profileUserName').innerText = currentUser.name;
+          document.getElementById('profileUserId').innerText = `User ID: #${currentUser.id}` + (currentUser.username ? ` (@${currentUser.username})` : '');
+        }
+      }
+      syncFromBackend();
+    }
+
+    // Pull the real, server-side wallet/spins/referral state for this user
+    async function syncFromBackend() {
+      if (!currentUser.id) return;
+      try {
+        const res = await fetch(`/api/user/${currentUser.id}`);
+        const data = await res.json();
+
+        currentUser.balance = data.wallet;
+        currentUser.spinsAvailable = data.spins_available;
+        currentUser.spinsEarnedTotal = data.spins_earned_total;
+        currentUser.referralsCount = data.referral_count;
+        currentUser.transactions = data.transactions || [];
+
+        const refEl = document.getElementById('referralCodeText');
+        if (refEl) refEl.innerText = data.referral_link;
+
+        syncBalanceDisplay();
+        updateSpinsUI();
+        renderTransactionList();
+      } catch (e) {
+        console.error('Backend sync failed (is bot.py running and WEBAPP_URL correct?):', e);
+        showAppToast('Could not reach server — check your connection', '⚠️');
+      }
+    }
+
+    // Carousel slides
+    const heroSlides = [
+      {
+        sub: 'JOIN OUR',
+        title: 'TELEGRAM',
+        desc: 'Stay updated with Rohit Giveaway payment proofs & alerts!'
+      },
+      {
+        sub: '1 REFER =',
+        title: '1 LUCKY SPIN',
+        desc: 'Invite your friends & win instant cash with guaranteed payout!'
+      }
+    ];
+
+    function activateSlide(index) {
+      const slide = heroSlides[index];
+      document.getElementById('heroSubhead').innerText = slide.sub;
+      document.getElementById('heroTitle').innerText = slide.title;
+      document.getElementById('heroDesc').innerText = slide.desc;
+
+      document.querySelectorAll('.b-dot').forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === index);
+      });
+    }
+
+    let slideIndex = 0;
+    setInterval(() => {
+      slideIndex = (slideIndex + 1) % heroSlides.length;
+      activateSlide(slideIndex);
+    }, 6000);
+
+    // Confetti Engine
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let confettiParticles = [];
+
+    function updateCanvasSize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', updateCanvasSize);
+    updateCanvasSize();
+
+    function fireConfetti() {
+      confettiParticles = [];
+      const colors = ['#38bdf8', '#0ea5e9', '#0284c7', '#06b6d4', '#e11d48', '#ffffff'];
+      for (let i = 0; i < 75; i++) {
+        confettiParticles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 3,
+          vx: (Math.random() - 0.5) * 14,
+          vy: (Math.random() - 0.8) * 16,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vrot: (Math.random() - 0.5) * 10,
+          alpha: 1
+        });
+      }
+      runConfettiLoop();
+    }
+
+    function runConfettiLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let running = false;
+
+      confettiParticles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.4;
+        p.rotation += p.vrot;
+        p.alpha -= 0.015;
+
+        if (p.alpha > 0) {
+          running = true;
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        }
+      });
+
+      if (running) {
+        requestAnimationFrame(runConfettiLoop);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    // App Initialization
+    function initApp() {
+      loadUserData();
+      initTelegramMiniApp();
+      applyAppTheme();
+      drawLuckyWheel();
+      syncBalanceDisplay();
+      updateSpinsUI();
+      renderTransactionList();
+    }
+
+    window.addEventListener('DOMContentLoaded', initApp);
+    initApp();
+  </script>
+</body>
+</html>
